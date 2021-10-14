@@ -1,0 +1,27 @@
+p {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+li.level-1 {
+    padding-left: 0;
+}
+
+li.level-2 {
+    padding-left: 20px;
+}
+
+li.level-3 {
+    padding-left: 40px;
+}
+
+.content {
+    display: none;
+}
+
+.content.show {
+    display: block;
+}
