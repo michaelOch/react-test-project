@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import WithCollapse from '../WithCollapse/WithCollapse';
 import AppContext from '../../contexts/AppContext';
+import ListInner from '../ListInner/ListInner';
 import './ListItem.css';
 
 function ListItem({ isCollapsed, setIsCollapsed, collapseAll, name, countries }) {
 
-    const { closeTabs, setCloseTabs } = useContext(AppContext);
+    const { closeTabs } = useContext(AppContext);
 
     useEffect(() => {
         if (closeTabs) {
@@ -25,16 +26,10 @@ function ListItem({ isCollapsed, setIsCollapsed, collapseAll, name, countries })
                                     {
                                         countries ? 
                                             countries.length > 0 ? 
-                                                countries.map((item, i) => {
-                                                    if ((countries.length - 1) === i) {
-                                                        return (
-                                                            <li key={i + 1} onClick={() => setCloseTabs(true)} className="level-2"><p>{item.name}</p></li>
-                                                        )
-                                                    } else {
-                                                        return (
-                                                            <li key={i + 1} className="level-2"><p>{item.name}</p></li>
-                                                        )
-                                                    }
+                                                countries.map((country, i) => {
+                                                    return (
+                                                        <ListInner key={i + 1} country={country} />
+                                                    )
                                                 })
                                                 : null
                                             : null

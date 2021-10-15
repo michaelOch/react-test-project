@@ -14,7 +14,9 @@ function App() {
             name
             countries {
                 name
-                languages
+                languages {
+                    name
+                }
             }
         }
     }
@@ -39,7 +41,6 @@ function App() {
     return (
         <ApolloProvider client={client}>
             <AppContext.Provider value={{closeTabs, setCloseTabs}}>
-                {console.log(data)}
                 <div className="App">
                     {
                         isLoading ? 

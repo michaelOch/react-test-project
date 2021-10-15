@@ -7,15 +7,24 @@ p {
 }
 
 li.level-1 {
+    position: relative;
     padding-left: 0;
 }
 
 li.level-2 {
-    padding-left: 20px;
+    position: relative;
+    padding-left: 30px;
 }
 
 li.level-3 {
-    padding-left: 40px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.arrow {
+    position: absolute;
+    top: 6px;
+    left: 10px;
 }
 
 .content {
