@@ -1,12 +1,26 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import WithCollapse from '../WithCollapse/WithCollapse';
 import AppContext from '../../contexts/AppContext';
-import ListInner from '../ListInner/ListInner';
+import ListWrapper from '../ListWrapper/ListWrapper';
 import './ListItem.css';
 
-function ListItem({ isCollapsed, setIsCollapsed, collapseAll, name, countries }) {
+function ListItem({ node }) {
 
-    const { closeTabs } = useContext(AppContext);
+    const { isCollapsed, setIsCollapsed, collapseAll } = WithCollapse();
+
+    const { closeTabs, setCloseTabs } = useContext(AppContext);
+
+    const { name, countries, languages } = node;
+
+    const [children, setChildren] = useState();
+
+    useEffect(() => {
+        if (countries) {
+            setChildren(countries);
+        } else if (languages) {
+            setChildren(languages);
+        }
+    }, [countries, languages]);
 
     useEffect(() => {
         if (closeTabs) {
@@ -14,34 +28,26 @@ function ListItem({ isCollapsed, setIsCollapsed, collapseAll, name, countries })
         }
     }, [closeTabs, collapseAll]);
 
+    const handleToggle = () => {
+        if (children) {
+            setIsCollapsed(!isCollapsed);
+        } else {
+            setCloseTabs(true);
+        }
+    }
+
     return (
-        <li className="level-1">
-            {
-                name ? 
-                    (
-                        <div>
-                            <p className="label toggle" onClick={() => setIsCollapsed(!isCollapsed)}>{name}</p>
-                            {
-                                (!isCollapsed) && <ul className="">
-                                    {
-                                        countries ? 
-                                            countries.length > 0 ? 
-                                                countries.map((country, i) => {
-                                                    return (
-                                                        <ListInner key={i + 1} country={country} />
-                                                    )
-                                                })
-                                                : null
-                                            : null
-                                    }
-                                </ul>
-                            }
-                        </div>
-                    )
-                    : null
-            }
+        <li className="level">
+            <span className="arrow"></span>
+            <p className="label toggle" onClick={handleToggle}>{name}</p>
+                {
+                    (!isCollapsed) && children && children.length > 0 && 
+                        <ListWrapper 
+                            data={children} 
+                        />
+                }
         </li>
     )
 }
 
-export default WithCollapse(ListItem);
+export default ListItem;

@@ -6,25 +6,19 @@ p {
     cursor: pointer;
 }
 
-li.level-1 {
-    position: relative;
-    padding-left: 0;
-}
-
-li.level-2 {
-    position: relative;
-    padding-left: 30px;
-}
-
-li.level-3 {
+li.level {
     position: relative;
     padding-left: 30px;
 }
 
 .arrow {
     position: absolute;
-    top: 6px;
-    left: 10px;
+    top: 20px;
+    left: 0;
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background-color: #ccc;
 }
 
 .content {

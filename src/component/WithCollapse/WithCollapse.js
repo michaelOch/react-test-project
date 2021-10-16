@@ -1,40 +1,19 @@
-import React from 'react';
+import { useState } from 'react'
 
-const WithCollapse = (Component) => 
-    class HOC extends React.Component {
+function WithCollapse() {
 
-        constructor () {
-            super ();
-            this.setIsCollapsed = this.setIsCollapsed.bind(this);
-            this.collapseAll = this.collapseAll.bind(this);
-        }
+    const [isCollapsed, setIsCollapsed] = useState(true);   
 
-        state = {
-            isCollapsed: true
-        }
-
-        setIsCollapsed = (e) => {
-            this.setState({
-                isCollapsed: !this.state.isCollapsed
-            });
-        }
-
-        collapseAll = (e) => {
-            this.setState({
-                isCollapsed: true
-            })
-        }
-
-        render() {
-            return (
-                <Component 
-                    {...this.props}
-                    isCollapsed={this.state.isCollapsed} 
-                    setIsCollapsed={this.setIsCollapsed} 
-                    collapseAll={this.collapseAll}
-                />
-            )
-        }
+    const collapseAll = (e) => {
+        setIsCollapsed(true);
     }
 
+    return ({
+        isCollapsed,
+        collapseAll,
+        setIsCollapsed
+    })
+}
+
 export default WithCollapse;
+

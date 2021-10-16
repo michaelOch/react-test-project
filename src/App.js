@@ -46,9 +46,14 @@ function App() {
                         isLoading ? 
                             <Loader />
                             : 
-                            <ListWrapper 
-                                data={updatedData && updatedData.continents} 
-                            />
+                            (
+                                <div>
+                                    <h3>CONTINENTS</h3>
+                                    <ListWrapper 
+                                        data={updatedData && updatedData.continents} 
+                                    />
+                                </div>
+                            )
                     }
                 </div>
             </AppContext.Provider>
